@@ -855,10 +855,16 @@ function flipCard(card,emoji){
 
 
 // ========== SURPRISE ==========
-const PASSWORD='tuba tahzeen'; // Change this to her nickname!
+const PASSWORD = 'tuba tahzeen';
+
 function unlockSurprise(){
-  const val=document.getElementById('passwordInput').value.trim().toLowerCase();
-  if(val===PASSWORD){
+  const val = document.getElementById('passwordInput')
+    .value
+    .toLowerCase()
+    .replace(/\s+/g, ' ')   // 🔥 fix: remove extra spaces
+    .trim();
+
+  if(val === PASSWORD){
     document.getElementById('surpriseLock').style.display='none';
     const content=document.getElementById('surpriseContent');
     content.classList.add('show');
@@ -866,13 +872,7 @@ function unlockSurprise(){
     showToast("🎉 You unlocked the surprise! 💖");
     setTimeout(triggerFullConfetti,500);
   }else{
-    document.getElementById('passwordInput').style.borderColor='#FF6B9D';
-    document.getElementById('passwordInput').style.boxShadow='var(--glow-pink)';
-    showToast("Hmm, that's not quite right! 🤔 Try again!");
-    setTimeout(()=>{
-      document.getElementById('passwordInput').style.borderColor='rgba(255,255,255,0.3)';
-      document.getElementById('passwordInput').style.boxShadow='none';
-    },1000);
+    showToast("Wrong password 😅 Try again!");
   }
 }
 function triggerFireworks(){
